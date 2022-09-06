@@ -1,0 +1,57 @@
+{
+  "training": {
+    "use_embedding": false,
+    "epochs": 50,
+    "optimizer": "Adam",
+    "loss_function": "CrossEntropyLoss",
+    "optimizer_args": {"lr": 0.001},
+    "train_convergence": true,
+    "convergence_args": {
+      "max_epochs": 200,
+      "tolerance": 200,
+      "metric_higher_is_better": true,
+
+      "convergence_evaluation_metric": "validation_acc"
+    },
+    "output_type": "many2one",
+    "stateful": false
+  },
+  "data": {
+    "dict_size": 37,
+    "batch_size": 128,
+    "num_keys": 9
+  },
+  "model": {
+    "recurrent_unit": "FastWeights",
+    "hidden_size": 20,
+    "activation": null,
+    "rnn_args": {
+      "stp": {
+        "learn_plastic_weight_params": false,
+        "plastic_bias": false,
+        "plasticity_type": {
+          "weight": "stp",
+          "bias": "stp"
+        },
+        "learn_plastic_weight_params_kwargs": {
+            "weight_lambda": {
+              "fixed_parameter_value": 0.9
+            },
+            "weight_gamma": {
+              "fixed_parameter_value": 0.5
+            }
+        },
+        "plastic_weight_connections": "hidden"
+      },
+      "S": 1,
+      "activation": "tanh"
+    }
+  },
+  "stats": {
+    "output" : ["validation_acc_list", "validation_energy_list"],
+    "display_rate": 10
+  },
+  "command": {
+    "train": "python run_art.py --config_file_path ~/workspace/STPN/AssociativeRetrievalTask/config/ART_FW_S1_h20.json --train --eval --eval-energy --seed 0 --gpu 3"
+  }
+}

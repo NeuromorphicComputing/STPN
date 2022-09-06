@@ -1,0 +1,13 @@
+{
+  "energy": {
+    "zero_idx": 12
+  },
+  "params_override_eval": {
+    "nbiter": 200000,
+    "bs": 512
+  },
+  "command": {
+    "train": "No training for random policy",
+    "eval": "python3 run_maze.py --net_type random --nbiter 100 --bs 512 --eplen 200 --hs 100 --type random --lr 1e-4 --l2 0 --addpw 3 --pe 10 --blossv 0.1 --bent 0.03 --rew 10 --save_every 10 --rsp 1  --da tanh  --msize 13 --wp 0.0  --gc 4.0  --eval-energy --config_file_train experiments-config/Maze/Random_Maze.json --config_file_path experiments-config/Maze/Random_Maze.json --rngseed 0  --gpu 0 --eval"
+  }
+}

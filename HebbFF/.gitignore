@@ -1,0 +1,15 @@
+
+*.DS_Store
+*.pdf
+*.pyc
+*__pycache__*
+
+manuscript/
+results/
+others/
+
+*_eval_*.pkl
+*_generalization.pkl
+*_popSizeAcc.pkl
+*_hist*.pkl
+*.pkl*.pkl

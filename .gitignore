@@ -1,1 +1,5 @@
-.idea
+# PyCharm idea folder
+**/.idea/**
+
+# Cached scripts
+**/__pycache__/**

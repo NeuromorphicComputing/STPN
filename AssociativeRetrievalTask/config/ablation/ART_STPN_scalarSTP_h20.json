@@ -1,0 +1,87 @@
+{
+  "training": {
+    "use_embedding": false,
+    "epochs": 50,
+    "optimizer": "Adam",
+    "loss_function": "CrossEntropyLoss",
+    "optimizer_args": {"lr": 0.001},
+    "train_convergence": true,
+    "convergence_args": {
+      "max_epochs": 200,
+      "tolerance": 200,
+      "metric_higher_is_better": true,
+
+      "convergence_evaluation_metric": "validation_acc"
+    },
+    "output_type": "many2one",
+    "stateful": false
+  },
+  "data": {
+    "dict_size": 37,
+    "batch_size": 128,
+    "num_keys": 9
+  },
+  "model": {
+    "recurrent_unit": "STPNr",
+    "hidden_size": 20,
+    "activation": "functional_tanh",
+    "rnn_args": {
+      "stp": {
+        "learn_plastic_weight_params": true,
+        "learn_plastic_weight_params_dims": [],
+        "plastic_weight_clamp_val": null,
+        "plastic_bias": false,
+        "plasticity_type": {
+          "weight": "stp",
+          "bias": "stp"
+        },
+        "plasticity_type_kwargs": {
+          "weight": {
+            "plastic_weight_dependent_factor": {
+              "learn_parameter": false,
+              "fixed_parameter_value": 0.5
+            }
+          },
+          "bias": {
+            "plastic_bias_dependent_factor": {
+              "learn_parameter": false,
+              "fixed_parameter_value": 0.5
+            }
+          },
+          "weight_norm": {
+            "ord": 2
+          },
+          "plastic_weight_norm": {
+            "ord": 2,
+            "norm": "G",
+            "time": "pre"
+          }
+        },
+        "learn_plastic_bias_params": false,
+        "learn_plastic_bias_params_dims": [0],
+        "plastic_weights_init_config" : {
+            "weight_lambda": {
+                "mode": "uniform", "mean": 0.5, "spread": 0.5, "hidden_weighting": null
+            },
+            "weight_gamma":{
+                "mode":"uniform", "mean": 0, "spread": 0.001, "hidden_weighting": "both"
+            },
+            "bias_lambda": {
+              "mode": "uniform", "mean": 0.5, "spread": 0.5, "hidden_weighting": null
+            },
+            "bias_gamma": {
+              "mode":"uniform", "mean": 0, "spread": 0.001, "hidden_weighting": "both"
+            }
+        },
+        "plastic_weight_connections": "all"
+      }
+    }
+  },
+  "stats": {
+    "output" : ["validation_acc_list", "validation_energy_list"],
+    "display_rate": 10
+  },
+  "command": {
+    "train": "python run_art.py --config_file_path ~/workspace/STPN/AssociativeRetrievalTask/config/ablation/ART_STPN_scalarSTP_h20.json --train --eval --eval-energy --seed 0 --gpu 3"
+  }
+}

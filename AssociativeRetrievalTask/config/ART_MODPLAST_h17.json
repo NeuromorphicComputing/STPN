@@ -1,0 +1,39 @@
+{
+  "training": {
+    "use_embedding": false,
+    "epochs": 50,
+    "optimizer": "Adam",
+    "loss_function": "CrossEntropyLoss",
+    "optimizer_args": {"lr": 0.001},
+    "train_convergence": true,
+    "convergence_args": {
+      "max_epochs": 200,
+      "tolerance": 200,
+      "metric_higher_is_better": true,
+
+      "convergence_evaluation_metric": "validation_acc"
+    },
+    "output_type": "many2one",
+    "stateful": false
+  },
+  "data": {
+    "dict_size": 37,
+    "batch_size": 128,
+    "num_keys": 9
+  },
+  "model": {
+    "recurrent_unit": "MODPLAST",
+    "hidden_size": 17,
+    "activation": null,
+    "rnn_args": {
+      "net_type": "modplast", "da": "tanh", "addpw": 3, "clamp_val": 1.0, "NBDA": 1
+    }
+  },
+  "stats": {
+    "output" : ["validation_acc_list", "validation_energy_list"],
+    "display_rate": 10
+  },
+  "command": {
+    "train": "python run_art.py --config_file_path ~/workspace/STPN/AssociativeRetrievalTask/config/ART_MODPLAST_h17.json --train --eval --eval-energy --seed 0 --gpu 1"
+  }
+}

@@ -17,7 +17,7 @@ Short-term plasticity (STP) is a mechanism that stores decaying memories in syna
 ### Experiments in the paper
 The plots and tables displayed in the paper can be generated using ICML_all_plots.ipynb
 
-For each task described in the paper, the repository includes a separate folder with each own README.md with instructions to setup, run experiments, and analyze results.
+For each task described in the paper, the repository includes a separate folder with its own README.md with instructions to setup, run experiments, and analyze results.
 
 ## Cite
 To cite this work please use the following citation

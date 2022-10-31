@@ -50,13 +50,13 @@ class STPNR(torch.nn.Module):
             total_input = torch.cat((seq_element, states[0]), dim=1)
             # combine fixed and plastic weights into one efficacy matrix G, which is normalised
             total_weights = self.weight + states[1]
-            # affine transformation, with optional biases, and activation function
-            h_tp1 = torch.tanh(torch.einsum('bf,bhf->bh', total_input, total_weights) + self.bias)
+            # linear transformation
+            h_tp1 = torch.einsum('bf,bhf->bh', total_input, total_weights)
 
             # compute norm per row (add small number to avoid division by 0)
             norm = torch.linalg.norm(total_weights, ord=2, dim=2, keepdim=True) + 1e-16
-            # norm output instead of total_weights for lower memory footprint
-            h_tp1 = h_tp1 / norm.squeeze(-1)
+            # norm output instead of total_weights for lower memory footprint, add bias and non-linearity
+            h_tp1 = torch.tanh(h_tp1 / norm.squeeze(-1) + self.bias)
             # normalise synaptic weights
             f_tp1 = states[1] / norm
 

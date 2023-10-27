@@ -1,4 +1,5 @@
 # Short-Term Plasticity Neurons Learning to Learn and Forget
+_This open source project is not an official Huawei product. Huawei is not expected to provide support for this project._
 
 This repository reproduces the experiments of [this ICML 2022 paper](https://proceedings.mlr.press/v162/rodriguez22b.html), which has been accepted as Spotlight.
 
